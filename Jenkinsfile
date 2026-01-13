@@ -22,7 +22,7 @@ pipeline {
                             -d '{
                                     "username": "Jenkins",
                                     "embeds":[{
-                                        "description": "🚀 **배포 시작입니다. 슝슝**\\n프로젝트: Board-Server\\n브랜치: release\\n요청자: ${Author_ID} (${Author_Name})\\n빌드 번호: #${BUILD_NUMBER}\\n",
+                                        "description": "🚀  **배포 시작입니다. 슝슝**\\n프로젝트: Board-Server\\n브랜치: release\\n요청자: ${Author_ID} (${Author_Name})\\n빌드 번호: #${BUILD_NUMBER}\\n",
                                         "color": 3447003
                                     }]
                                 }' \
@@ -90,7 +90,7 @@ pipeline {
                     -d '{
                             "username": "Jenkins",
                             "embeds":[{
-                                "description": "✅ **배포 성공 🎉**\\n프로젝트: Board-Server\\n빌드 번호: #${BUILD_NUMBER}\\n**소요 시간**: ${elapsedTime()}초\\n[서비스 바로가기: ](http://ahddi.shop)\\n",
+                                "description": "✅  **배포 성공 🎉**\\n프로젝트: Board-Server\\n빌드 번호: #${BUILD_NUMBER}\\n**소요 시간**: ${elapsedTime()}초\\n[서비스 바로가기](http://ahddi.shop)\\n",
                                 "color": 5763719
                             }]
                         }' \
@@ -106,7 +106,7 @@ pipeline {
                     -d '{
                             "username": "Jenkins",
                             "embeds":[{
-                                "description": "❌ **배포 실패 ㅜ^ㅜ ❌**\\n프로젝트: Board-Server\\n빌드 번호: #${BUILD_NUMBER}\\n[로그 보기](${BUILD_URL})\\n",
+                                "description": "❌  **배포 실패 ㅜ^ㅜ ❌**\\n프로젝트: Board-Server\\n빌드 번호: #${BUILD_NUMBER}\\n[로그 보기](${BUILD_URL})\\n",
                                 "color": 15548997
                             }]
                         }' \
