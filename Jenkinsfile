@@ -1,17 +1,15 @@
 def START_TIME
 
-
-
 pipeline {
     agent any
 
-    stage("start_time chk") {
-        script {
-            START_TIME = System.currentTimeMillis()
-        }
-    }
-
     stages {
+        stage("start_time chk") {
+            script {
+                START_TIME = System.currentTimeMillis()
+            }
+        }
+        
         stage("CI/CD start") {
             steps {
                 script {
