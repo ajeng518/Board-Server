@@ -1,5 +1,4 @@
 pipeline {
-    def START_TIME = System.currentTimeMillis()
     agent any
 
     stages {
@@ -73,11 +72,6 @@ pipeline {
         }
     }
 
-    def elapsedTime() {
-        def diff = System.currentTimeMillis() - START_TIME
-        return String.format("%.1f", diff / 1000.0)
-    }
-
     post{
         success{
             withCredentials([string(credentialsId: 'discord-webhook', variable: 'DISCORD_WEBHOOK')]){
@@ -86,7 +80,7 @@ pipeline {
                     -H "Content-Type: application/json" \
                     -d '{
                             "username": "Jenkins",
-                            "content": "✅ **🎉 배포 성공 🎉**\\n프로젝트: Board-Server\\n빌드 번호: #${BUILD_NUMBER}\\n**소요시간**: ${elapsedTime()}초\\n",
+                            "content": "✅ **🎉 배포 성공 🎉**\\n프로젝트: Board-Server\\n빌드 번호: #${BUILD_NUMBER}\\n",
                             "color": 5763719
                         }' \
                     ${DISCORD_WEBHOOK}
