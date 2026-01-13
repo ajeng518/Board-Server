@@ -7,6 +7,18 @@ pipeline {
                 script {
                     def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim()
                     def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim()
+                    
+                    withCredentials([string(credentialsId: 'discord-webhook', variable: 'DISCORD_WEBHOOK')]){
+                        sh """
+                        curl -X POST \
+                            -H "Content-Type: application/json" \
+                            -d '{
+                                    "username": "Jenkins",
+                                    "content": "🚀 **배포 시작입니다**\\n프로젝트: Board-Server\\n브랜치: release\\n요청자: ${Author_ID} (${Author_Name})\\n빌드 번호: #${BUILD_NUMBER}"
+                                }' \
+                            ${DISCORD_WEBHOOK}
+                        """
+                    }
                 }
             }
         }
@@ -55,6 +67,35 @@ pipeline {
                 sh "docker pull ajeng518/board-gcp-be:latest && docker run -d -p 8080:8080 --name backend ajeng518/board-gcp-be:latest"
                 
                 echo '백엔드 EC2에 배포 완료!'
+            }
+        }
+    }
+
+    post{
+        success{
+            withCredentials([string(credentialsId: 'discord-webhook', variable: 'DISCORD_WEBHOOK')]){
+                sh """
+                curl -X POST \
+                    -H "Content-Type: application/json" \
+                    -d '{
+                            "username": "Jenkins",
+                            "content": "✅ **🎉 배포 성공 🎉**\\n프로젝트: Board-Server\\n빌드 번호: #${BUILD_NUMBER}"
+                        }' \
+                    ${DISCORD_WEBHOOK}
+                """
+            }
+        }
+        failure{
+            withCredentials([string(credentialsId: 'discord-webhook', variable: 'DISCORD_WEBHOOK')]){
+                sh """
+                curl -X POST \
+                    -H "Content-Type: application/json" \
+                    -d '{
+                            "username": "Jenkins",
+                            "content": "❌ ** 배포 실패 ㅜ^ㅜㅜ**\\n프로젝트: Board-Server\\n빌드 번호: #${BUILD_NUMBER}"
+                        }' \
+                    ${DISCORD_WEBHOOK}
+                """
             }
         }
     }
