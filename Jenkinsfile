@@ -14,7 +14,7 @@ pipeline {
                             -H "Content-Type: application/json" \
                             -d '{
                                     "username": "Jenkins",
-                                    "content": "🚀 **배포 시작입니다**\\n프로젝트: Board-Server\\n브랜치: release\\n요청자: ${Author_ID} (${Author_Name})\\n빌드 번호: #${BUILD_NUMBER}"
+                                    "content": "🚀 **배포 시작입니다**\\n프로젝트: Board-Server\\n브랜치: release\\n요청자: ${Author_ID} (${Author_Name})\\n빌드 번호: #${BUILD_NUMBER}\\n---"
                                 }' \
                             ${DISCORD_WEBHOOK}
                         """
@@ -79,7 +79,7 @@ pipeline {
                     -H "Content-Type: application/json" \
                     -d '{
                             "username": "Jenkins",
-                            "content": "✅ **🎉 배포 성공 🎉**\\n프로젝트: Board-Server\\n빌드 번호: #${BUILD_NUMBER}"
+                            "content": "✅ **🎉 배포 성공 🎉**\\n프로젝트: Board-Server\\n빌드 번호: #${BUILD_NUMBER}\\n---"
                         }' \
                     ${DISCORD_WEBHOOK}
                 """
@@ -92,7 +92,7 @@ pipeline {
                     -H "Content-Type: application/json" \
                     -d '{
                             "username": "Jenkins",
-                            "content": "❌ ** 배포 실패 ㅜ^ㅜㅜ**\\n프로젝트: Board-Server\\n빌드 번호: #${BUILD_NUMBER}"
+                            "content": "❌ ** 배포 실패 ㅜ^ㅜㅜ**\\n프로젝트: Board-Server\\n빌드 번호: #${BUILD_NUMBER}\\n---"
                         }' \
                     ${DISCORD_WEBHOOK}
                 """
