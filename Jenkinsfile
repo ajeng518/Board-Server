@@ -4,15 +4,10 @@ pipeline {
     agent any
 
     stages {
-        stage("start_time chk") {
-            script {
-                START_TIME = System.currentTimeMillis()
-            }
-        }
-        
         stage("CI/CD start") {
             steps {
                 script {
+                    env.START_TIME = System.currentTimeMillis().toString()
                     def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim()
                     def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim()
                     
@@ -119,7 +114,7 @@ pipeline {
 }
 
 def elapsedTime() {
-    def diff = System.currentTimeMillis() - START_TIME
+    def diff = System.currentTimeMillis() - env.START_TIME.toLong()
     return String.format("%.1f", diff / 1000.0)
 }
 
