@@ -1,6 +1,6 @@
-pipeline {
-    def START_TIME = System.currentTimeMillis()
+def START_TIME = System.currentTimeMillis()
 
+pipeline {
     agent any
 
     stages {
