@@ -1,4 +1,8 @@
 def START_TIME
+def elapsedTime() {
+    def diff = System.currentTimeMillis() - env.START_TIME.toLong()
+    return String.format("%.1f", diff / 1000.0)
+}
 
 pipeline {
     agent any
@@ -111,10 +115,5 @@ pipeline {
             }
         }
     }
-}
-
-def elapsedTime() {
-    def diff = System.currentTimeMillis() - env.START_TIME.toLong()
-    return String.format("%.1f", diff / 1000.0)
 }
 
