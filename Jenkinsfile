@@ -1,4 +1,6 @@
 pipeline {
+    def START_TIME = System.currentTimeMillis()
+
     agent any
 
     stages {
@@ -13,9 +15,11 @@ pipeline {
                         curl -X POST \
                             -H "Content-Type: application/json" \
                             -d '{
-                                    "username": "Jenkins",
-                                    "content": "🚀 **배포 시작입니다**\\n프로젝트: Board-Server\\n브랜치: release\\n요청자: ${Author_ID} (${Author_Name})\\n빌드 번호: #${BUILD_NUMBER}\\n",
-                                    "color": 3447003
+                                    "embeds":[{
+                                        "username": "Jenkins",
+                                        "content": "🚀 **배포 시작입니다**\\n프로젝트: Board-Server\\n브랜치: release\\n요청자: ${Author_ID} (${Author_Name})\\n빌드 번호: #${BUILD_NUMBER}\\n",
+                                        "color": 3447003
+                                    }]
                                 }' \
                             ${DISCORD_WEBHOOK}
                         """
@@ -79,9 +83,11 @@ pipeline {
                 curl -X POST \
                     -H "Content-Type: application/json" \
                     -d '{
-                            "username": "Jenkins",
-                            "content": "✅ **🎉 배포 성공 🎉**\\n프로젝트: Board-Server\\n빌드 번호: #${BUILD_NUMBER}\\n",
-                            "color": 5763719
+                            "embeds":[{
+                                "username": "Jenkins",
+                                "content": "✅ **🎉 배포 성공 🎉**\\n프로젝트: Board-Server\\n빌드 번호: #${BUILD_NUMBER}\\n**소요 시간**: ${elapsedTime()}초\\n[서비스 바로가기](http://ahddi.shop)\\n",
+                                "color": 5763719
+                            }]
                         }' \
                     ${DISCORD_WEBHOOK}
                 """
@@ -93,9 +99,11 @@ pipeline {
                 curl -X POST \
                     -H "Content-Type: application/json" \
                     -d '{
-                            "username": "Jenkins",
-                            "content": "❌ ** 배포 실패 ㅜ^ㅜㅜ**\\n프로젝트: Board-Server\\n빌드 번호: #${BUILD_NUMBER}\\n[로그 보기](${BUILD_URL})",
-                            "color": 15548997
+                            "embeds":[{
+                                "username": "Jenkins",
+                                "content": "❌ ** 배포 실패 ㅜ^ㅜㅜ**\\n프로젝트: Board-Server\\n빌드 번호: #${BUILD_NUMBER}\\n[로그 보기](${BUILD_URL})\\n",
+                                "color": 15548997
+                            }]
                         }' \
                     ${DISCORD_WEBHOOK}
                 """
@@ -103,3 +111,9 @@ pipeline {
         }
     }
 }
+
+def elapsedTime() {
+    def diff = System.currentTimeMillis() - START_TIME
+    return String.format("%.1f", diff / 1000.0)
+}
+
