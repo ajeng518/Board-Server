@@ -1,4 +1,10 @@
-def START_TIME = System.currentTimeMillis()
+def START_TIME
+
+stage {
+  script {
+    START_TIME = System.currentTimeMillis()
+  }
+}
 
 pipeline {
     agent any
