@@ -1,4 +1,4 @@
-package com.fastcampus.boardserver.contoroller;
+package com.fastcampus.boardserver.controller;
 import com.fastcampus.boardserver.aop.LoginCheck;
 import com.fastcampus.boardserver.dto.UserDTO;
 import com.fastcampus.boardserver.dto.request.UserDeleteId;
