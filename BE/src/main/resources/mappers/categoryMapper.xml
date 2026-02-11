@@ -15,4 +15,9 @@
         WHERE id = #{id}
     </update>
 
+    <delete id="deleteCategory">
+        DELETE FROM category
+        WHERE id = #{id}
+    </delete>
+
 </mapper>
