@@ -5,6 +5,7 @@ import com.fastcampus.boardserver.dto.CategoryDTO;
 import com.fastcampus.boardserver.dto.PostDTO;
 import com.fastcampus.boardserver.dto.UserDTO;
 import com.fastcampus.boardserver.dto.request.CategoryRequest;
+import com.fastcampus.boardserver.dto.request.PostDeleteRequest;
 import com.fastcampus.boardserver.dto.response.CommonResponse;
 import com.fastcampus.boardserver.service.impl.PostServiceImpl;
 import com.fastcampus.boardserver.service.impl.UserServiceImpl;
@@ -44,6 +45,17 @@ public class PostController {
         UserDTO memberInfo = userService.getUserInfo(accountId);
         List<PostDTO> postDTOList = postService.getMyProducts(memberInfo.getId());
         CommonResponse commonResponse = new CommonResponse<>(HttpStatus.OK, "SUCCESS", "myPostInfo", postDTOList);
+        return ResponseEntity.ok(commonResponse);
+    }
+
+    @DeleteMapping("{postId}")
+    @LoginCheck(type = LoginCheck.UserType.USER)
+    public ResponseEntity<CommonResponse<PostDeleteRequest>> deleteposts(String accountId,
+                                                                         @PathVariable(name = "postId") int postId,
+                                                                         @RequestBody PostDeleteRequest postDeleteRequest) {
+        UserDTO memberInfo = userService.getUserInfo(accountId);
+        postService.deleteProduct(memberInfo.getId(), postId);
+        CommonResponse commonResponse = new CommonResponse<>(HttpStatus.OK, "SUCCESS", "deleteposts", postDeleteRequest);
         return ResponseEntity.ok(commonResponse);
     }
 }

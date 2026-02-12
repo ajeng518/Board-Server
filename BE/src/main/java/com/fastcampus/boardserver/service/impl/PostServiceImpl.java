@@ -45,11 +45,21 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void updateProducts(PostDTO postDTO) {
-
+        if(postDTO != null && postDTO.getId() != 0 && postDTO.getUserId() != 0){
+            postMapper.updateProducts(postDTO);
+        }else {
+            log.error("updateProducts Error! {}", postDTO);
+            throw new RuntimeException("updateProducts ERROR! 물품 변경 메서드를 확인해주세요\n"+ "Params : "+postDTO);
+        }
     }
 
     @Override
     public void deleteProduct(int userId, int productId) {
-
+        if(userId != 0 && productId != 0){
+            postMapper.deleteProduct((productId));
+        }else{
+            log.error("deleteProduct ERROR! {}", productId);
+            throw new RuntimeException("updateProducts ERROR! 물품 삭제 메서드를 확인해주세요\n" + "Parmas: "+productId);
+        }
     }
 }

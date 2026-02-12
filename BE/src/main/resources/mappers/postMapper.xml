@@ -24,4 +24,21 @@
         WHERE userId = #{userId}
     </select>
 
+    <update id="updateProducts" parameterType="com.fastcampus.boardserver.dto.PostDTO">
+        UPDATE post
+        SET name = #{name},
+            contents = #{contents},
+            views = #{views},
+            categoryId = #{categoryId},
+            userId = #{userId},
+            fileId = #{fileId},
+            updateTime = #{updateTime}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteProduct" >
+        DELETE FROM post
+        WHERE id = #{productId}
+    </delete>
+
 </mapper>
