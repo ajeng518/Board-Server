@@ -37,4 +37,6 @@ public class CategoryController {
     public void updateCategories(String accountId, @PathVariable(name = "categoryId") int categoryId){
         categoryService.delete(categoryId);
     }
+
+
 }
