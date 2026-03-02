@@ -2,6 +2,7 @@ package com.fastcampus.boardserver.service;
 
 import com.fastcampus.boardserver.dto.CommentDTO;
 import com.fastcampus.boardserver.dto.PostDTO;
+import com.fastcampus.boardserver.dto.TagDTO;
 
 import java.util.List;
 
@@ -14,4 +15,8 @@ public interface PostService {
     void registerComment(CommentDTO commentDTO);
     void updateComment(CommentDTO commentDTO);
     void deletePostComment(int userId, int commentId);
+
+    void registerTag(TagDTO tagDTO);
+    void updateTag(TagDTO tagDTO);
+    void deletePostTag(int userId, int tagId);
 }
