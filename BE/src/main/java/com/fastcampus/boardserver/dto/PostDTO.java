@@ -18,7 +18,8 @@ public class PostDTO {
     private int isAdmin;
     private String contents;
     private Date createTime;
-    private int view;
+    private int views;
+    private int categoryId;
     private int userId;
     private int fileId;
     private Date updateTime;

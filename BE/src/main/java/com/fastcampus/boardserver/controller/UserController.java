@@ -41,6 +41,9 @@ public class UserController {
                             HttpSession session) {
         ResponseEntity<LoginResponse> responseEntity = null;
         String id = userLoginRequest.getUserId();
+
+        log.info("userID: {}", id);
+
         String password = userLoginRequest.getPassword();
         LoginResponse loginResponse;
         UserDTO userInfo = userService.login(id, password);
