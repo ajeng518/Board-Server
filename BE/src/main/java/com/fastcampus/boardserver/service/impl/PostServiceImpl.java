@@ -36,7 +36,7 @@ public class PostServiceImpl implements PostService {
     @CacheEvict(value = "getProducts", allEntries = true)
     @Override
     public void register(String id, PostDTO postDTO) {
-        log.info("postDTO: {}", postDTO);
+        log.info("postWerviceImpl-getPost: postDTO: {}", postDTO);
 
         UserDTO memberInfo = userProfileMapper.getUserProfile(id);
         postDTO.setUserId(memberInfo.getId());

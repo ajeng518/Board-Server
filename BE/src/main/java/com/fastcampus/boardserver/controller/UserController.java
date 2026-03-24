@@ -42,7 +42,7 @@ public class UserController {
         ResponseEntity<LoginResponse> responseEntity = null;
         String id = userLoginRequest.getUserId();
 
-        log.info("userID: {}", id);
+//        log.info("userID: {}", id);
 
         String password = userLoginRequest.getPassword();
         LoginResponse loginResponse;
